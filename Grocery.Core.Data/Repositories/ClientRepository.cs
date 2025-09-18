@@ -6,7 +6,10 @@ namespace Grocery.Core.Data.Repositories
 {
     public class ClientRepository : IClientRepository
     {
-        private readonly List<Client> clientList;
+        private List<Client> clientList;
+        // private readonly List<Client> clientList;
+
+        private int clientId;
 
         public ClientRepository()
         {
@@ -19,12 +22,34 @@ namespace Grocery.Core.Data.Repositories
 
         public Client? Get(string email)
         {
-            return clientList[0];
+            // Checks the email of the client to the information
+            // Run through the clients
+            for (int pos = 0; pos < clientList.Count; pos++)
+            {
+                
+
+                if (clientList[pos].emailAddress == email)
+                {
+                    clientId = pos;
+                    break;
+                }
+            }
+            return clientList[clientId];
         }
 
         public Client? Get(int id)
         {
-            return clientList[0];
+            // Checks the id for the client to get the information
+            // Loop through the clients
+            for (int pos = 0; pos < clientList.Count; pos++)
+            {
+                if (clientList[pos].Id == id)
+                {
+                    clientId = pos;
+                    break;
+                }
+            }
+            return clientList[clientId];
         }
 
         public List<Client> GetAll()
